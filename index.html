@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .shb {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        #hvr {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Hello World!</p>
+        <button id="btn1">Click me</button>
+    </div>
+       <!-- submit form  -->
+
+
+    <form id="student-form">
+        <input type="text" name="name" id="firstname" placeholder="Enter name" required>
+        <input type="email" name="email" id="email" placeholder="Enter email" required>
+        <button type="submit">Save Data</button>
+    </form>
+
+    <!-- change text -->
+
+
+    <!-- <h1 id="heading1">WELCOME!</h1>
+    <button id="btn2">Click to Leave</button> -->
+    <h1 id="heading1" onclick="change()">WELCOME!</h1>
+    <button id="btn2" onclick="change()">Click to Leave</button>
+
+    <!-- show/hide -->
+     <br>
+     <br>
+
+    <div class="shb">
+
+    </div>
+    <br>
+    <button id="sh-d" onclick="showAndHide()">Hide</button>
+
+    <!-- hover -->
+    <br>
+    <br>
+    <div id="hvr">
+
+    </div>
+    <br>
+    <script src="main.js"></script>
+</body>
+</html>

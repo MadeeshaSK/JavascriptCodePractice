@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Picker</title>
+  <style>
+    #colorPicker {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgb(0, 0, 0);
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      user-select: none;
+    }
+    #colorDisplay {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="colorPicker">
+    Move your mouse to pick a color!
+    <div id="colorDisplay"></div>
+  </div>
+
+  <script>
+    const colorPicker = document.getElementById('colorPicker');
+    const colorDisplay = document.getElementById('colorDisplay');
+
+    colorPicker.addEventListener('mousemove', (e) => {
+      // Get mouse coordinates relative to the window
+      let x = e.clientX;
+      let y = e.clientY;
+
+      // Calculate Red (R) and Green (G) based on mouse position
+      let r = Math.round((x / window.innerWidth) * 255);
+      let g = Math.round((y / window.innerHeight) * 255);
+
+      // Set Blue (B) to a constant value
+      let b = 150;
+
+      // Update the background color with the RGB values
+      colorPicker.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+      // Update the display text with the current RGB values
+      colorDisplay.textContent = `RGB(${r}, ${g}, ${b})`;
+    });
+  </script>
+</body>
+</html>
