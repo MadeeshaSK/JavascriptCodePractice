@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Color Picker</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     #colorPicker {
       width: 100%;
       height: 100vh;
@@ -25,31 +30,61 @@
 </head>
 <body>
   <div id="colorPicker">
-    Move your mouse to pick a color!
+    Move your mouse to pick a color! Scroll to change opacity.
     <div id="colorDisplay"></div>
   </div>
 
   <script>
     const colorPicker = document.getElementById('colorPicker');
     const colorDisplay = document.getElementById('colorDisplay');
+    
+    let alpha = 100; // Default alpha channel value
+    let b = 0; // Initial blue value
+    let r = 0; // Red value based on mouse X position
+    let g = 0; // Green value based on mouse Y position
+    let time = 0; // Time counter for cycling blue
+    let startTime = Date.now(); // Start time for the 10-second cycle
+
+    // Update the blue value every 10 seconds
+    function updateBlueColor() {
+      let elapsed = (Date.now() - startTime) / 10000; // Calculate time elapsed in seconds (10s cycle)
+      b = Math.round((Math.sin(elapsed * 2 * Math.PI) + 1) * 127.5); // Blue value oscillating between 0-255
+
+      // Update the background color with the current RGB and alpha values
+      colorPicker.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+      colorDisplay.textContent = `RGB(${r}, ${g}, ${b}), Alpha(${alpha})`;
+    }
+
+    // Call the updateBlueColor function every 100ms (to smoothly cycle the blue value)
+    setInterval(updateBlueColor, 100);
 
     colorPicker.addEventListener('mousemove', (e) => {
       // Get mouse coordinates relative to the window
       let x = e.clientX;
       let y = e.clientY;
 
-      // Calculate Red (R) and Green (G) based on mouse position
-      let r = Math.round((x / window.innerWidth) * 255);
-      let g = Math.round((y / window.innerHeight) * 255);
+      // Calculate RGB values based on mouse position
+      r = Math.round((x / window.innerWidth) * 255); // Red (0 to 255) based on X position
+      g = Math.round((y / window.innerHeight) * 255); // Green (0 to 255) based on Y position
 
-      // Set Blue (B) to a constant value
-      let b = 150;
-
-      // Update the background color with the RGB values
+      // Update the background color with the generated RGB and Alpha values
       colorPicker.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 
-      // Update the display text with the current RGB values
-      colorDisplay.textContent = `RGB(${r}, ${g}, ${b})`;
+      // Update the display text with the current RGB and Alpha values
+      colorDisplay.textContent = `RGB(${r}, ${g}, ${b}), Alpha(${alpha})`;
+    });
+
+    // Handle mouse wheel to change the alpha (opacity) value
+    colorPicker.addEventListener('wheel', (e) => {
+      if (e.deltaY < 0) {
+        alpha = Math.min(alpha + 1, 100); // Scroll up (increase opacity, max 100)
+      } else {
+        alpha = Math.max(alpha - 1, 0); // Scroll down (decrease opacity, min 0)
+      }
+
+      // Update the background color with the new alpha value
+      colorPicker.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${alpha / 100})`;
+      colorDisplay.textContent = `RGB(${r}, ${g}, ${b}), Alpha(${alpha})`;
     });
   </script>
 </body>
