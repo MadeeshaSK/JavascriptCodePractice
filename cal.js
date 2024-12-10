@@ -27,5 +27,3 @@ inputElementObj.addEventListener('keyup', (event)=>{
         }
     } 
 });
-
-addEventListener
