@@ -33,58 +33,16 @@ inputElementObj.addEventListener('keyup', (event)=>{
     } 
 });
 
-const operators = {
-    add: (a, b) => a + b,
-    sub: (a, b) => a - b,
-    mul: (a, b) => a * b,
-    div: (a, b) => a / b,
-    mod: (a, b) => a % b
-};
-
-Object.keys(operators).forEach(op => {
-    document.getElementById(op).addEventListener('click', () => {
-        let result = operators[op](numberOne, numberTwo);
-        answerObj.textContent = result;
-        inputElementObj.placeholder = 'Answer is : ' + result;
-        operatorObj.textContent = op;
-    });
+inputElementObj.addEventListener('keyup', (event)=>{
+    if (event.key == 'Enter'){
+        let tempValue = inputElementObj.value;
+        //check whhether number or not
+        if (!isNaN(tempValue)){
+            numberTwo = parseInt(tempValue);
+            inputElementObj.textContent = '';
+            number2Obj.textContent = numberTwo;
+        }
+    } 
 });
 
-/*
-operatorAdd.addEventListener('click', ()=>{
-    let result = numberOne + numberTwo;
-    answerObj.textContent = result;
-    inputElementObj.placeholder = result;
-});
-operatorSub.addEventListener('click',()=>{
-    let result = numberOne - numberTwo;
-    answerObj.textContent = result;
-    nputElementObj.placeholder = result;
-});
-operatorMul.addEventListener('click',()=>{
-    let result = numberOne * numberTwo;
-    answerObj.textContent = result;
-    nputElementObj.placeholder = result;
-});
-operatorDiv.addEventListener('click',()=>{
-    let result = numberOne / numberTwo;
-    answerObj.textContent = result;
-    inputElementObj.placeholder = result;
-});
-operatorMod.addEventListener('click',()=>{
-    let result = numberOne % numberTwo;
-    answerObj.textContent = result;
-    nputElementObj.placeholder = result;
-});
-*/
-
-clearObj.addEventListener('click', ()=>{
-    numberOne = 0;
-    numberTwo = 0;
-    number1Obj.textContent = '';
-    number2Obj.textContent = '';
-    answerObj.textContent = '';
-    inputElementObj.placeholder = 'Enter first number';
-    inputElementObj.value = '';
-    isFirstNumber = true;
-});
+addEventListener
