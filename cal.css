@@ -14,11 +14,11 @@
 .inner{
     background-color: white;
     width: 300px;
-    height: 500px;
+    height: 200px;
     border-radius: 5px;
     box-shadow: 5px 5px 10px black;
 }
-.top, .bottum, .result {
+.top, .bottum {
     padding: 10px;
 }
 .input {
@@ -51,4 +51,10 @@
     justify-content: space-between;
     align-items: center;
 }
-
+#clear {
+    height: 100%;
+    width: 20%;
+    background-color: silver;
+    padding: 10px;
+    border: 1px solid black;
+}

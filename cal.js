@@ -46,7 +46,11 @@ Object.keys(operators).forEach(op => {
         let result = operators[op](numberOne, numberTwo);
         answerObj.textContent = result;
         inputElementObj.placeholder = 'Answer is : ' + result;
-        operatorObj.textContent = op;
+        if (op === 'add') operatorObj.textContent = '+';
+        if (op === 'sub') operatorObj.textContent = '-';
+        if (op === 'mul') operatorObj.textContent = '*';
+        if (op === 'div') operatorObj.textContent = '/';
+        if (op === 'mod') operatorObj.textContent = '%';
     });
 });
 
@@ -81,9 +85,10 @@ operatorMod.addEventListener('click',()=>{
 clearObj.addEventListener('click', ()=>{
     numberOne = 0;
     numberTwo = 0;
-    number1Obj.textContent = '';
-    number2Obj.textContent = '';
-    answerObj.textContent = '';
+    number1Obj.textContent = 'Num 1';
+    number2Obj.textContent = 'Num 2';
+    answerObj.textContent = 'Answer';
+    operatorObj.textContent = 'Operator';
     inputElementObj.placeholder = 'Enter first number';
     inputElementObj.value = '';
     isFirstNumber = true;
