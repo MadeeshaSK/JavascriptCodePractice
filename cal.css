@@ -18,7 +18,7 @@
     border-radius: 5px;
     box-shadow: 5px 5px 10px black;
 }
-.top, .bottum {
+.top, .bottum, .result {
     padding: 10px;
 }
 .input {
@@ -44,3 +44,11 @@
     font-weight: bolder;
     border-radius: 5px;
 }
+.result {
+    border: 3px solid black;
+    margin: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
