@@ -32,7 +32,12 @@
 /* .input:focus{
     outline: none;
 } */
-
+/*remove increament and decrement clicks in the input field*/
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 .bottum {
     display: flex;
