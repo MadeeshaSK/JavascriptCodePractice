@@ -45,25 +45,11 @@ Object.keys(operators).forEach(op => {
     document.getElementById(op).addEventListener('click', () => {
         let result = operators[op](numberOne, numberTwo);
         answerObj.textContent = result;
-        if (op == 'add'){
-            operatorObj.textContent = '+';
-        }
-        if (op == 'sub'){
-            operatorObj.textContent = '-';
-        }
-        if (op == 'mul'){
-            operatorObj.textContent = '*';
-        }
-        if (op == 'div'){
-            operatorObj.textContent = '/';
-        }
-        if (op == 'mod'){
-            operatorObj.textContent = '%';
-        }
         inputElementObj.placeholder = 'Answer is : ' + result;
     });
 });
 
+   
 
 /*
 operatorAdd.addEventListener('click', ()=>{
