@@ -49,6 +49,8 @@ Object.keys(operators).forEach(op => {
     });
 });
 
+
+
 /*
 operatorAdd.addEventListener('click', ()=>{
     let result = numberOne + numberTwo;
