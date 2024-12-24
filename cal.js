@@ -13,6 +13,7 @@ let operatorObj = document.getElementById('operator');
 let answerObj = document.getElementById('answer');
 let clearObj = document.getElementById('clear');
 
+
 inputElementObj.addEventListener('keyup', (event)=>{
     if (event.key == 'Enter'){
         let tempValue = inputElementObj.value;
