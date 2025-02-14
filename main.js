@@ -381,7 +381,7 @@ fetch('https://jsonplaceholder.typicode.com/posts').then(response => {
 // we use async await because we want to wait for the response from the server before executing the next line of code 
 // async await is a syntactic sugar for promises
 
-const loadData = async () => {
+const loadData2 = async () => {
     let dataSet = await fetch('https://jsonplaceholder.typicode.com/posts');
     let data = await dataSet.json();
     return data;
@@ -396,7 +396,7 @@ loadData().then(result => {
 
 // error handling
 
-const loadData = async () => {  
+const loadData3 = async () => {  
     try {
         let dataSet = await fetch('https://jsonplaceholder.typicode.com/posts');
         let data = await dataSet.json();
@@ -405,3 +405,84 @@ const loadData = async () => {
         return error;
     }
 }
+
+//string and string manipulation
+
+//strings are immutable(can not change)
+
+let name = 'nimal';
+console.log(name);//nimal
+console.log(name[0]);//n
+name[0]='b';
+console.log(name);//nimal
+let x = name.replace('n', 'b');
+console.log(x);//bimal
+
+let story = 'java script is easy';
+let pickedText1 = story.slice(5); 
+console.log(pickedText1);// script is easy
+let pickedText2 = story.slice(5,11); 
+console.log(pickedText2);// script 
+let replaceText = story.replace('easy', 'hard'); 
+console.log(replaceText);// script is hard
+let uppercaseText = story.toUpperCase();
+console.log(uppercaseText); // SCRIPT IS HARD
+let splitArr = story.split(' ');
+console.log(splitArr);// {'java', 'script', 'is', 'easy'}
+
+//ES - 6 (features)
+
+//let and cosnst
+//arrow functions
+
+function calculate(x,y) {
+    return x+y;
+}
+let calculate=(x,y)=>x+y;
+
+//template literal
+
+let lang ='js';
+let state ='easy';
+console.log(`${lang} is ${state}`); //js is easy
+
+//destructuring
+//array
+let animals = [1, 3, 2];
+let [saman,second] = animals;
+console.log(saman);//1
+//object
+let student = {id : '100', name : 'john', age : 23};
+let {id,age} = student;
+console.log(id);//100
+
+//enhanced object literals
+let age = 20;
+let name = 'hey';
+let students = {
+    age,
+    name,
+    desc () {
+        console.log(`age is ${age}`);
+    }
+}
+console.log(students.age);//20
+console.log(students.desc);// age is 20
+
+//export modules
+export const calculate2 = (x,y) = x+y;
+
+//in another js file
+import {calculate2} from './namefile.js';
+console.log(calculate2(10,20));//30
+
+//classes
+
+class student2 {
+    constructor(name,age) {
+        this.name =name;
+        this.age = age;
+    }
+}
+let data = new student2('Madeesha', 23);
+console.log(data.age); //23
