@@ -140,7 +140,7 @@ btnInner.addEventListener('click',(e)=>{console.log('Btn Inner');e.stopPropagati
 
 /*pass a function as an argument to another function
 if we want to trigger a codeblock after the completion of another codeblock,
- which is taking time to execute*/
+ which is taking time to execute, js is single threaded language,  syncronize (one after one)*/
 
 /*
 let product;
@@ -179,30 +179,35 @@ function complete(productName){
 orderMyPizza(complete);
 console.log('I am waiting ');
 
+//jsonplaceholder-free fake restapis
+/*in actual projects,
+ there are some situations to wait until data load from http get reques,
+  so call back need for accurate code running as there will be delays*/
+
 // http request
 
-console.log('Start');
-let comments ;
-//create a new instance of XMLHttpRequest
-let http1 = new XMLHttpRequest();
-//initialize the request
-http1.open('GET','https://jsonplaceholder.typicode.com/comments');
-//send the request
-http1.send();
-//listen for the response
-function loadData(printData){
-    http1.onreadystatechange = function(){
-        if (http1.readyState === 4 && http1.status === 200) {
-            comments = JSON.parse(http1.responseText);
-            printData();
-        }
-    }
-}
-function printData(){
-    console.log(comments);
-}
-loadData(printData);
-console.log('End');
+// console.log('Start');
+// let comments ;
+// //create a new instance of XMLHttpRequest
+// let http1 = new XMLHttpRequest();
+// //initialize the request
+// http1.open('GET','https://jsonplaceholder.typicode.com/comments');
+// //send the request
+// http1.send();
+// //listen for the response
+// function loadData(printData){
+//     http1.onreadystatechange = function(){
+//         if (http1.readyState === 4 && http1.status === 200) {
+//             comments = JSON.parse(http1.responseText);
+//             printData();
+//         }
+//     }
+// }
+// function printData(){
+//     console.log(comments);
+// }
+// loadData(printData);
+// console.log('End');
 
 //when we refresh without saving, show alert
 
@@ -210,3 +215,193 @@ window.addEventListener('beforeunload', (event)=>{
     event.preventDefault();
     event.returnValue('are you crazy?');
 })
+
+//fetch api
+
+const loadData = (url, callback) => {
+    const http = new XMLHttpRequest();
+    http.addEventListener('readystatechange',()=>{
+        if(http.readyState === 4 && http.status === 200) {
+            callback(undefined,JSON.parse(http.responseText));
+        }else if(http.readyState === 4){
+            callback('could not fetch data', undefined);
+        }
+    })
+    http.open('GET', url);
+    http.send();
+}
+
+//ladder of callback(inner call) we call it callback hell, like recursive function
+
+loadData('https://jsonplaceholder.typicode.com/posts', (error, data)=>{
+    console.log(data);
+
+    loadData('https://jsonplaceholder.typicode.com/comments', (error, data)=>{
+        console.log(data);
+    })
+})
+
+// loadData('https://jsonplaceholder.typicode.com/posts', (error, data)=>{
+//     if(data) {
+//         console.log(data);
+//     } else {
+//         console.log(error);
+//     }
+// })
+// loadData('https://jsonplaceholder.typicode.com/comments', (error, data)=>{
+//     if(data) {
+//         console.log(data);
+//     } else {
+//         console.log(error);
+//     }
+// })
+
+// function checkResponse(error, data){
+//     if(data) {
+//         console.log(data);
+//     } else {
+//         console.log(error);
+//     }
+// }
+// loadData(checkResponse);
+
+
+//ready states
+/*  0 - request not initialized
+    1 - server connection established
+    2 - request received
+    3 - processing request
+    4 - request finished and response is ready
+*/
+
+//status codes
+/*  200 - OK
+    404 - Not Found / (client error -400..)
+    500 - Internal Server Error / (server error -500..)
+*/
+
+// JSON is a object type to transfer data (as string) esasily between a server and a client rather than XML
+
+/*
+JSON
+{
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+XML
+<person>
+    <name>John</name>
+    <age>30</age>
+    <city>New York</city>
+</person>
+*/
+
+//promises
+//solution for avoid drowbacks of callback hell
+
+const doYouLikeMe = (salary) => {
+    return new Promise((resolve, reject) => {    
+        if (salary > 50000) {
+            resolve('Yes, I do');
+        } else {    
+            reject("No, I don't");
+        }
+    });
+}
+
+doYouLikeMe(60000).then(data => {
+    console.log(data);
+}).catch(error => {
+    console.log(error);
+})
+
+//A **boilerplate** is a standard, reusable piece of code or text that provides a basic structure for a project or document.
+
+//fetch api (promise based)
+
+const fetchData = (url) => {
+    return new Promise((resolve, reject) => {
+        const http = new XMLHttpRequest();
+        http.addEventListener('readystatechange', () => {
+            if (http.readyState === 4 && http.status === 200) {
+                resolve(JSON.parse(http.responseText));
+            } else if (http.readyState === 4) {
+                reject('could not fetch data');
+            }
+        });
+        http.open('GET', url);
+        http.send();
+    });
+};
+
+fetchData('https://jsonplaceholder.typicode.com/posts').then(data => {
+    console.log(data);
+}).catch(error => {
+    console.log(error);
+});
+
+// const urls = [
+//     'https://jsonplaceholder.typicode.com/posts',
+//     'https://jsonplaceholder.typicode.com/users',
+//     'https://jsonplaceholder.typicode.com/comments'
+// ];
+
+// urls.forEach(url => {
+//     fetchData(url).then(data => {
+//         console.log(`Data from ${url}:`, data);
+//     }).catch(error => {
+//         console.log(`Error fetching ${url}:`, error);
+//     });
+// });
+
+//chain promises
+
+fetchData('https://jsonplaceholder.typicode.com/posts').then(data => {
+    console.log(data);
+    return fetchData('https://jsonplaceholder.typicode.com/comments');
+}).then(data => {
+    console.log(data);
+}).catch(error => {
+    console.log(error);
+});
+
+//fletch is inbuild function which returns promise
+//fletch API
+
+fetch('https://jsonplaceholder.typicode.com/posts').then(response => {
+    return response.json();
+}).then(data => {    
+    console.log(data);
+}).catch(error => {
+    console.log(error);
+});
+
+// async await
+// we use async await because we want to wait for the response from the server before executing the next line of code 
+// async await is a syntactic sugar for promises
+
+const loadData = async () => {
+    let dataSet = await fetch('https://jsonplaceholder.typicode.com/posts');
+    let data = await dataSet.json();
+    return data;
+}
+loadData().then(result => {
+    console.log(result);
+}).catch(error => {
+    console.log(error);
+});
+
+//callback -> callback hell -> promises -> async await
+
+// error handling
+
+const loadData = async () => {  
+    try {
+        let dataSet = await fetch('https://jsonplaceholder.typicode.com/posts');
+        let data = await dataSet.json();
+        return data;
+    } catch (error) {
+        return error;
+    }
+}
