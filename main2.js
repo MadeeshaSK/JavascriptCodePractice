@@ -1,0 +1,112 @@
+// Rest  and spread
+// rest
+let numbers = [1, 2, 3, 4, 5];
+let [first, second, ...rest] = numbers;
+console.log(first); // 1
+console.log(second); // 2
+console.log(rest); // [3, 4, 5]
+// spread
+let numbers1 = [1, 2, 3];
+let numbers2 = [4, 5, 6];
+let numbers3 = [...numbers1, ...numbers2, 7, 8, 9];
+console.log(numbers3); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+//date and time
+let date = new Date();
+console.log(date); // 2020-06-10T12:00:00.000Z
+console.log(date.getFullYear()); // 2020
+console.log(date.getMonth()); // 5(6-1)
+console.log(date.getDate()); // 10
+console.log(date.getDay()); // 3 0= sunday, 1= monday, 2= tuesday, 3= wednesday, 4= thursday, 5= friday, 6= saturday
+console.log(date.getHours()); // 12
+console.log(date.getMinutes()); // 0
+console.log(date.getSeconds()); // 0
+console.log(date.getMilliseconds()); // 0
+console.log(date.getTime()); // 1591785600000
+console.log(date.getTimezoneOffset()); // -330
+let date2 = new Date('2020-10-20');
+console.log(date2); // 2020-10-20T00:00:00.000Z
+console.log(date2.toISOString()); // 2020-10-20T00:00:00.000Z
+console.log(date2.toISOString().split('T')[0]); // 2020-10-20
+//pipe
+let date3 = new Date('2020-10-20');
+let options = { year: 'numeric', month: 'long', day: 'numeric' };   
+console.log(date3.toLocaleDateString('en-US', options)); // October 20, 2020
+console.log(date3.toDateString()); // Tue Oct 20 2020
+console.log(date3.toTimeString()); // 05:30:00 GMT+0530 (India Standard Time)
+console.log(date3.getDate()+7); // 27
+
+//Math
+console.log(Math.PI); // 3.141592653589793
+console.log(Math.round(4.7)); // 5
+console.log(Math.round(4.4)); // 4
+console.log(Math.pow(2, 3)); // 8
+console.log(Math.sqrt(16)); // 4
+console.log(Math.abs(-4.7)); // 4.7
+console.log(Math.ceil(4.4)); // 5 (higher integer)
+console.log(Math.floor(4.7)); // 4(lower integer)
+console.log(Math.sin(90 * Math.PI / 180)); // 1
+console.log(Math.cos(0 * Math.PI / 180)); // 1
+console.log(Math.min(0, 150, 30, 20, -8, -200)); // -200
+console.log(Math.max(0, 150, 30, 20, -8, -200)); // 150
+console.log(Math.random()); // 0.123456789
+console.log(Math.floor(Math.random() * 11)); // 4
+console.log(Math.floor(Math.random() * 11)); // 8
+console.log(Math.floor(Math.random() * 11)); // 1
+
+//regular expression(regex) for form validation
+const text = new RegExp('js')
+console.log(text.test('js')) // true;
+let message = 'Hello, welcome to javascript';
+let pattern = /javascript/;
+console.log(pattern.test(message)); // true
+let pattern1 = /Hello/;
+console.log(pattern1.test(message)); // true
+let pattern2 = /hello/;
+console.log(pattern2.test(message)); // false
+//flags
+let pattern3 = /hello/i;
+// i - case insensitive, g - global search, m - multiline search
+console.log(pattern3.test(message)); // true
+let pattern4 = /\d/;
+console.log(pattern4.test(message)); // false
+// \s - space, \d - digit, \w - word character, \S - non-space, \D - non-digit, \W - non-word character
+//quantifiers
+// + - one or more, * - zero or more, ? - zero or one, {n} - exactly n times, {n,} - n or more times, {n,m} - n to m times
+
+// local storage and session storage and cookies
+// local storage - data is stored without expiration date, and will not be deleted when the browser is closed
+//5MB for each domain in local storage in google chrome
+let token = '123456';
+localStorage.setItem('token', token);
+let expDate = new Date();
+expDate.setDate(expDate.getDate() + 31);
+let obj = { 
+    token2: 'dfsfdfsfds',
+    expDate: expDate 
+};
+localStorage.setItem('user', JSON.stringify(obj));
+let getObj = JSON.parse(localStorage.getItem('user'));
+console.log(getObj.token2); // dfsfdfsfds
+console.log(getObj); // { token2: 'dfsfdfsfds', expDate: '2020-07-11T12:00:00.000Z' }
+localStorage.removeItem('token');
+localStorage.clear();// clear all items
+// session storage - data is stored for one session (data is lost when the browser tab is closed)
+sessionStorage.setItem('token', token);
+sessionStorage.setItem('user', JSON.stringify(obj));
+let getObj2 = JSON.parse(sessionStorage.getItem('user'));
+console.log(getObj2.token2); // dfsfdfsfds
+console.log(getObj2); // { token2: 'dfsfdfsfds', expDate: '2020-07-11T12:00:00.000Z' }
+sessionStorage.removeItem('token');
+sessionStorage.clear();// clear all items
+//cookies
+// cookies are data, stored in small text files, on your computer, by the websites you visit, cookies are used to remember information about the user
+// cookies are stored in the browser
+// cookies are sent to the server with each request
+// cookies can be set to expire after a specific date
+// cookies can only be read by the domain that set them
+// more secure than local storage and session storage
+//if you use cookies , need to get permission from the user by using cookie consent banner or popup or user agreement
+document.cookie = 'username=John Doe; expires=Thu, 18 Dec 2020 12:00:00 UTC; path=/';
+
+//ajax
