@@ -110,3 +110,124 @@ sessionStorage.clear();// clear all items
 document.cookie = 'username=John Doe; expires=Thu, 18 Dec 2020 12:00:00 UTC; path=/';
 
 //ajax
+//ajax - asynchronous javascript and xml
+//ajax is a technique for creating fast and dynamic web pages
+//ajax allows web pages to be updated asynchronously by exchanging small amounts of data with the server behind the scenes
+//ajax is used for sending data to the server without refreshing the page
+//ajax is used for updating the page without refreshing the page
+//ajax is used for getting data from the server without refreshing the page
+
+let btn = document.getElementById('btnId');
+btn.addEventListener('click', (event) => {
+    let data = document.getElementById('postId');
+    let id = data.value;
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts/'+id, true);
+    xhr.onload = () => {
+        console.log(xhr.responseText);
+    }
+    xhr.send();
+})
+
+// this
+// this keyword refers to the object it belongs to
+// this keyword is used to access the object properties and methods
+// this keyword is used to access the object constructor
+// this keyword is used to access the object itself
+// this keyword is used to access the object elements
+// this keyword is used to access the object events
+
+// this keyword in global context
+console.log(this); // window object
+
+// this keyword in function context
+const student = {
+    name: 'John',
+    age: 25,
+    getMarks : function() {
+        let sayMarks = () => {
+            console.log(`hello ${this.name}`);
+        }
+    }
+}
+
+//jQuery
+//jQuery is a fast, small, and feature-rich javascript library
+//jQuery is a cross-platform javascript library
+
+// let state = true;
+// const showAndHide = () => {
+//     if(state) {
+//         document.getElementById('box').style.display = 'none';
+//     } else {
+//         document.getElementById('box').style.display = 'block';
+//     }
+//     state = !state;
+// }
+
+// we can write the above code in jQuery as below in easy way
+// add jquery cdn in before the js file in html file , get the code from jquery.com google cdn
+// then search for code in jquery.com for show and hide and copy the code and paste it in the js file
+// $ is the symbol for jquery
+
+// let state = true;
+// $('#btn').click(() => {
+//     if(state) {
+//         $('#box').hide(2000);//more ... fadeIn and fadeOut
+//     } else {
+//         $('#box').show(2000);
+//     }
+//     state = !state;
+// })
+
+let state = true;
+$('#btn').click(() => {
+    $('#box').toggle(2000); //more ... mouseenter and mouseleave
+    // $('#box').css('background-color', 'green');
+    // $('#box').css('color', 'white');
+    $('#box').css({
+        'background-color': 'green',
+        'color': 'white'
+    })
+})
+
+// click image and set the image in the box
+const setImage =(id) => {
+    if (id == 1) {
+        // let url1 = $('.i1').css('background-image');
+        // $('.top').css('background-image', url1);
+        $('.top').css('background-image', $('.i1').css('background-image'));
+    } else if (id == 2) {
+        $('.top').css('background-image', $('.i2').css('background-image'));
+    } else if (id == 3) {
+        $('.top').css('background-image', $('.i3').css('background-image'));
+    } else if (id == 4) {
+        $('.top').css('background-image', $('.i4').css('background-image'));
+    }
+}
+
+// load data using ajex and jquery with bootstrap
+
+$(document).ready(() => {
+    $.ajax({
+        url: 'https://jsonplaceholder.typicode.com/photos',
+        type: 'GET',
+        dataType: 'json',
+        success: (response) => {
+            let tBody = $('.table tbody');
+            tBody.empty();
+            response.forEach((item) => {
+                let row = $('<tr>').appendTo(tBody);
+                $('<td>').text(item.id).appendTo(row);
+                $('<td>').text(item.title).appendTo(row);
+                $('<td>').append($('<img>').attr('src', item.url)).css({width :"100px", hieght :'50px'}).appendTo(row);
+            })
+
+        },error: (error) => {
+            console.log(error);
+        }
+    })
+});
+
+
+
