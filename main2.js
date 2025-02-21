@@ -216,7 +216,7 @@ $(document).ready(() => {
         success: (response) => {
             let tBody = $('.table tbody');
             tBody.empty();
-            response.forEach((item) => {
+            response.slice(0, 10).forEach((item) => {//response.forEach((item) => { // all data
                 let row = $('<tr>').appendTo(tBody);
                 $('<td>').text(item.id).appendTo(row);
                 $('<td>').text(item.title).appendTo(row);
