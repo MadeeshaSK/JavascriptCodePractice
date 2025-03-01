@@ -1,0 +1,30 @@
+.login-main-outer, .signup-main-outer {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+.login-text, .signup-text {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+body {
+    background-color: #f8f9fa;
+    padding-bottom: 50px;
+}
+
+.customer-section {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
