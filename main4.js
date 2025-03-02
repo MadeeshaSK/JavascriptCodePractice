@@ -78,3 +78,30 @@ let horuArr = [Maninda, Gotabaya];
 //method chaining
 Maninda.getVote().horakanawa('Hora kanawa').doProtest();
 Anura.getVote().horuAllanawa(horuArr).apitaOniAnu();
+
+//prototype
+
+function Person2 (name,address) {
+    this.name = name;
+    this.address = address;
+}
+function Student (name) {
+    this.name = name;
+}
+
+const Kamal = new Person2 ('Kamal', 'Colombo');
+const Nimal = new Student ('Nimal');
+
+Nimal.__proto__ = Kamal;
+//basically we can inherit the properties of Kamal to Nimal(one of usage of prototype)
+
+console.log(Kamal);
+console.log(Nimal);
+
+//insert a new property and method to the prototype
+Person2.prototype.gender = 'Male';
+Person2.prototype.sayHello =()=>{
+    console.log('Hello');
+}
+console.log(Kamal.gender);
+Kamal.sayHello();
