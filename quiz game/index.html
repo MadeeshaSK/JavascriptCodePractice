@@ -11,11 +11,11 @@
         <div class="inner" style="height: 100vh; background-color: aliceblue; padding: 20px 10px">
             <div class="top" style="height: 50px; width: 100%; display: flex">
                 <div class="top-left" style="flex:1; display: flex">
-                    <input type="text" id="txt-time" class="form-control" disabled> &nbsp;&nbsp;
-                    <input type="text" id="txt-score" class="form-control" disabled> &nbsp;&nbsp;
+                    <input type="text" id="txt-time" class="form-control" style="font-weight: bold; text-align: center" disabled> &nbsp;&nbsp;
+                    <input type="text" id="txt-score" class="form-control" style="font-weight: bold; text-align: center" disabled> &nbsp;&nbsp;
                 </div>
                 <div class="top-right" style="width: 200px">
-                    <button id="btn-start" class="btn btn-primary" style="width: 100%; height: 100%">Start</button>
+                    <button id="btn-start" class="btn btn-primary"  onclick="startQuiz()" style="width: 100%; height: 100%">Start</button>
                 </div>
             </div>
             <hr>
@@ -24,28 +24,14 @@
             </div>
             <div class="a-wrapper" style="margin-top: 20px">
                 <form>
-                    <ul style="margin: 0; padding: 0; list-style: none">
-                        <li style="font-size: 18px">
-                            <input type="radio" name="answer" id="answer1" value="1">Answer 1
-                        </li>&nbsp;
-                        <li style="font-size: 18px">
-                            <input type="radio" name="answer" id="answer2" value="1">Answer 2
-                        </li>&nbsp;
-                        <li style="font-size: 18px">
-                            <input type="radio" name="answer" id="answer3" value="1">Answer 3
-                        </li>&nbsp;
-                        <li style="font-size: 18px">
-                            <input type="radio" name="answer" id="answer4" value="1">Answer 4
-                        </li>&nbsp;
-                        <li style="font-size: 18px">
-                            <input type="radio" name="answer" id="answer5" value="1">Answer 5
-                        </li>&nbsp;
+                    <ul style="margin: 0; padding: 0; list-style: none" id="answer-list">
+
                     </ul>
                 </form>
             </div>
             <div class="bottom" style="display: flex; justify-content: flex-end">
-                <button class="btn btn-outline-dark">Skip</button> &nbsp;&nbsp;
-                <button class="btn btn-success">Submit</button>
+                <button class="btn btn-outline-dark" onclick="verifyAnswer('skipped')">Skip</button> &nbsp;&nbsp;
+                <button class="btn btn-success" onclick="verifyAnswer('submit')">Submit</button>
             </div>
         </div>
     </div>
