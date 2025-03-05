@@ -228,3 +228,35 @@ const finalizedData = dataArray.flatMap((data) => [data * 2]);
 console.log(finalizedData);
 const finalizedData2 = dataArray.findIndex(data=>data>2);
 console.log(finalizedData2);
+
+// meta programming
+// meta programming is a programming technique to change the behavior of the code
+// meta programming is used to modify the code
+
+function createFunction(code) {
+    return new Function(`console.log("hello"); ${code}`);
+}
+const dynamicFunction = createFunction('console.log("Hello, I am the dynamic code");');
+dynamicFunction();
+
+function makeCalc(){
+    let calc = {};
+    calc.add = (a,b) => a+b;
+    calc.sub = (a,b) => a-b;
+    return calc;
+}
+const calculator = makeCalc();
+console.log(calculator.add(2,3));
+console.log(calculator.sub(2,3));
+
+const sumFunction = new Function('a','b','return a+b');
+console.log(sumFunction(2,3));
+
+// cronjob
+// cronjob is a library to schedule(specific time) the jobs in js
+
+function run() {
+    console.log(new Date());
+}
+setInterval(run, 1000);
+
